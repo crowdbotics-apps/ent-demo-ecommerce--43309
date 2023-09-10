@@ -10,115 +10,6 @@ import {
   Pressable,
   SafeAreaView
 } from "react-native"
-
-const HomeScreen = ({ navigation }) => {
-  const [filtered, setFiltered] = useState(false)
-  const [prodFilt, setProdFilt] = useState()
-  const [filterText, setFilterText] = useState()
-  const { entities: Democonnector_response_get_productfeeds } = useSelector(
-    state => state.Democonnector_response_get_productfeeds
-  )
-  const getApi = fetch("https://cb-kozel.github.io/Data/product-feed.json")
-  const dispatch = useDispatch()
-  console.log
-  useEffect(() => {
-    dispatch(democonnector_get_productfeedjson_list())
-  }, [])
-  const response = Democonnector_response_get_productfeeds
-    ? Democonnector_response_get_productfeeds
-    : exampleData
-
-  const catFilter = catName =>
-    response?.filter(x => x.data?.categories.some(y => y.name == catName))
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Pressable
-          onPress={() => navigation.navigate("Untitled2", setFiltered(false))}
-        >
-          <ImageBackground
-            source={{
-              uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Levi%27s_logo.svg/77px-Levi%27s_logo.svg.png"
-            }}
-            style={styles.headerImage}
-          />
-        </Pressable>
-        <Pressable onPress={() => navigation.navigate("ScreenAI4")}>
-          <ImageBackground
-            source={require("../images/shopping_bag_FILL0_wght400_GRAD0_opsz24.png")}
-            style={styles.bag}
-          />
-        </Pressable>
-      </View>
-
-      <View style={styles.subHeader}>
-        <Text style={styles.subHeaderText}>SALE ITEMS</Text>
-      </View>
-      <View style={styles.subHeader}>
-        <Pressable
-          onPress={() => {
-            setFiltered(true),
-              setProdFilt(catFilter("men")),
-              setFilterText("MEN")
-          }}
-        >
-          <Text style={styles.links}>MEN</Text>
-        </Pressable>
-        <Pressable
-          onPress={() => {
-            setFiltered(true),
-              setProdFilt(catFilter("women")),
-              setFilterText("WOMEN")
-          }}
-        >
-          <Text style={styles.links}>WOMEN</Text>
-        </Pressable>
-
-        <Pressable
-          onPress={() => {
-            setFiltered(true), setProdFilt(catFilter("kids"))
-          }}
-        >
-          <Text style={styles.links}>KIDS</Text>
-        </Pressable>
-        {filtered === true ? (
-          <Pressable style={styles.reset} onPress={() => setFiltered(false)}>
-            <ImageBackground
-              style={styles.removeFilt}
-              source={require("../images/close_FILL0_wght400_GRAD0_opsz24.png")}
-            ></ImageBackground>
-            <Text style={styles.resetText}>{filterText}</Text>
-          </Pressable>
-        ) : null}
-      </View>
-      <FlatList
-        data={filtered ? prodFilt : response}
-        keyExtractor={item => item?.id}
-        numColumns={5}
-        renderItem={({ item }) => (
-          <Pressable
-            style={styles.cardContainer}
-            onPress={() => {
-              navigation.navigate("Untitled3", item?.id), setFiltered(false)
-            }}
-          >
-            <ImageBackground
-              source={{
-                uri: item?.data.media[0].src
-              }}
-              style={styles.productImage}
-            ></ImageBackground>
-            <Text style={styles.productTitleSm}>{item?.data.name}</Text>
-            <Text style={styles.productPriceSm}>${item?.data.price}</Text>
-          </Pressable>
-        )}
-      />
-    </SafeAreaView>
-  )
-}
-
-export default HomeScreen
 const exampleData = [
   {
     id: 453634,
@@ -678,3 +569,111 @@ const exampleData = [
     }
   }
 ]
+const HomeScreen = ({ navigation }) => {
+  const [filtered, setFiltered] = useState(false)
+  const [prodFilt, setProdFilt] = useState()
+  const [filterText, setFilterText] = useState()
+  const { entities: Democonnector_response_get_productfeeds } = useSelector(
+    state => state.Democonnector_response_get_productfeeds
+  )
+  const getApi = fetch("https://cb-kozel.github.io/Data/product-feed.json")
+  const dispatch = useDispatch()
+  console.log
+  useEffect(() => {
+    dispatch(democonnector_get_productfeedjson_list())
+  }, [])
+  const response = Democonnector_response_get_productfeeds
+    ? Democonnector_response_get_productfeeds
+    : exampleData
+
+  const catFilter = catName =>
+    response?.filter(x => x.data?.categories.some(y => y.name == catName))
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Pressable
+          onPress={() => navigation.navigate("Untitled2", setFiltered(false))}
+        >
+          <ImageBackground
+            source={{
+              uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Levi%27s_logo.svg/77px-Levi%27s_logo.svg.png"
+            }}
+            style={styles.headerImage}
+          />
+        </Pressable>
+        <Pressable onPress={() => navigation.navigate("ScreenAI4")}>
+          <ImageBackground
+            source={require("../images/shopping_bag_FILL0_wght400_GRAD0_opsz24.png")}
+            style={styles.bag}
+          />
+        </Pressable>
+      </View>
+
+      <View style={styles.subHeader}>
+        <Text style={styles.subHeaderText}>SALE ITEMS</Text>
+      </View>
+      <View style={styles.subHeader}>
+        <Pressable
+          onPress={() => {
+            setFiltered(true),
+              setProdFilt(catFilter("men")),
+              setFilterText("MEN")
+          }}
+        >
+          <Text style={styles.links}>MEN</Text>
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            setFiltered(true),
+              setProdFilt(catFilter("women")),
+              setFilterText("WOMEN")
+          }}
+        >
+          <Text style={styles.links}>WOMEN</Text>
+        </Pressable>
+
+        <Pressable
+          onPress={() => {
+            setFiltered(true), setProdFilt(catFilter("kids"))
+          }}
+        >
+          <Text style={styles.links}>KIDS</Text>
+        </Pressable>
+        {filtered === true ? (
+          <Pressable style={styles.reset} onPress={() => setFiltered(false)}>
+            <ImageBackground
+              style={styles.removeFilt}
+              source={require("../images/close_FILL0_wght400_GRAD0_opsz24.png")}
+            ></ImageBackground>
+            <Text style={styles.resetText}>{filterText}</Text>
+          </Pressable>
+        ) : null}
+      </View>
+      <FlatList
+        data={filtered ? prodFilt : response}
+        keyExtractor={item => item?.id}
+        numColumns={5}
+        renderItem={({ item }) => (
+          <Pressable
+            style={styles.cardContainer}
+            onPress={() => {
+              navigation.navigate("Untitled3", item?.id), setFiltered(false)
+            }}
+          >
+            <ImageBackground
+              source={{
+                uri: item?.data.media[0].src
+              }}
+              style={styles.productImage}
+            ></ImageBackground>
+            <Text style={styles.productTitleSm}>{item?.data.name}</Text>
+            <Text style={styles.productPriceSm}>${item?.data.price}</Text>
+          </Pressable>
+        )}
+      />
+    </SafeAreaView>
+  )
+}
+
+export default HomeScreen

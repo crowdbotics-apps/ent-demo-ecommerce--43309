@@ -10,136 +10,6 @@ import {
   FlatList
 } from "react-native"
 import { styles } from "../../options/styles/styles"
-
-const ProductDetail = ({ navigation, route }) => {
-  const [filtered, setFiltered] = useState(false)
-  const [item, setItem] = useState(route.params)
-  const regex = /(<([^>]+)>)/gi
-  const { entities: Democonnector_response_get_productfeeds } = useSelector(
-    state => state.Democonnector_response_get_productfeeds
-  )
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(democonnector_get_productfeedjson_list())
-    setMainImage(product[0]?.data.media[0].src)
-  }, [item])
-  const response = Democonnector_response_get_productfeeds
-    ? Democonnector_response_get_productfeeds
-    : exampleData
-  const product = Democonnector_response_get_productfeeds
-    ? response.filter(i => i.id === item)
-    : exampleData
-  const typeFilter = response?.filter(obj => {
-    return (
-      obj?.data.attributes.type == product[0]?.data.attributes.type &&
-      obj?.data.attributes.gender == product[0]?.data.attributes.gender &&
-      obj?.id != product[0]?.id
-    )
-  })
-  const [mainImage, setMainImage] = useState()
-
-  const priceFormat = price =>
-    new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD"
-    }).format(price)
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Pressable
-          onPress={() => navigation.navigate("Untitled2", setFiltered(false))}
-        >
-          <ImageBackground
-            source={{
-              uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Levi%27s_logo.svg/77px-Levi%27s_logo.svg.png"
-            }}
-            style={styles.headerImage}
-          />
-        </Pressable>
-        <ImageBackground
-          source={require("../images/shopping_bag_FILL0_wght400_GRAD0_opsz24.png")}
-          style={styles.bag}
-        />
-      </View>
-
-      <View style={styles.flexRowMain}>
-        <View style={styles.flexColumn1}>
-          <ImageBackground
-            source={{
-              uri: mainImage
-            }}
-            style={styles.pdpImage}
-          />
-
-          <FlatList
-            data={product[0]?.data?.media}
-            keyExtractor={(index, item) => index}
-            numColumns={3}
-            renderItem={({ item }) => (
-              <Pressable onPress={() => setMainImage(item.src)}>
-                <ImageBackground
-                  style={styles.pdpImagePr}
-                  source={{
-                    uri: item?.src
-                  }}
-                />
-              </Pressable>
-            )}
-          ></FlatList>
-
-          <View>
-            <Text style={styles.h2}>Customers also view:</Text>
-          </View>
-        </View>
-
-        <View style={styles.flexColumn1}>
-          <Text style={styles.title}>{product[0]?.data.name}</Text>
-          <Text style={styles.prevProductPrice}>
-            {priceFormat(product[0]?.data.pricePrevious)}
-          </Text>
-          <Text style={styles.productPrice}>
-            {priceFormat(product[0]?.data.price)}
-          </Text>
-          <Pressable onPress={() => navigation.navigate("Untitled4")}>
-            <View style={styles.addToBag}>
-              <Text style={styles.addToBagText}>Add to Bag</Text>
-            </View>
-          </Pressable>
-
-          <Text style={styles.description}>
-            {product[0]?.data.features?.replace(regex, "")}
-          </Text>
-          <Text style={styles.materialTitle}>Material:</Text>
-          <Text style={styles.material}>
-            {product[0]?.data.attributes.material}
-          </Text>
-        </View>
-      </View>
-      <View style={styles.flexRow}>
-        <FlatList
-          data={typeFilter}
-          keyExtractor={item.id}
-          numColumns={5}
-          renderItem={({ item }) => (
-            <View>
-              <Pressable onPress={() => setItem(item.id)}>
-                <ImageBackground
-                  style={styles.pdpImagePr}
-                  source={{
-                    uri: item?.data.media[0].src
-                  }}
-                />
-              </Pressable>
-            </View>
-          )}
-        ></FlatList>
-      </View>
-    </SafeAreaView>
-  )
-}
-
-export default ProductDetail
 const exampleData = [
   {
     id: 453634,
@@ -699,3 +569,132 @@ const exampleData = [
     }
   }
 ]
+const ProductDetail = ({ navigation, route }) => {
+  const [filtered, setFiltered] = useState(false)
+  const [item, setItem] = useState(route.params)
+  const regex = /(<([^>]+)>)/gi
+  const { entities: Democonnector_response_get_productfeeds } = useSelector(
+    state => state.Democonnector_response_get_productfeeds
+  )
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(democonnector_get_productfeedjson_list())
+    setMainImage(product[0]?.data.media[0].src)
+  }, [item])
+  const response = Democonnector_response_get_productfeeds
+    ? Democonnector_response_get_productfeeds
+    : exampleData
+  const product = Democonnector_response_get_productfeeds
+    ? response.filter(i => i.id === item)
+    : exampleData
+  const typeFilter = response?.filter(obj => {
+    return (
+      obj?.data.attributes.type == product[0]?.data.attributes.type &&
+      obj?.data.attributes.gender == product[0]?.data.attributes.gender &&
+      obj?.id != product[0]?.id
+    )
+  })
+  const [mainImage, setMainImage] = useState()
+
+  const priceFormat = price =>
+    new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD"
+    }).format(price)
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Pressable
+          onPress={() => navigation.navigate("Untitled2", setFiltered(false))}
+        >
+          <ImageBackground
+            source={{
+              uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Levi%27s_logo.svg/77px-Levi%27s_logo.svg.png"
+            }}
+            style={styles.headerImage}
+          />
+        </Pressable>
+        <ImageBackground
+          source={require("../images/shopping_bag_FILL0_wght400_GRAD0_opsz24.png")}
+          style={styles.bag}
+        />
+      </View>
+
+      <View style={styles.flexRowMain}>
+        <View style={styles.flexColumn1}>
+          <ImageBackground
+            source={{
+              uri: mainImage
+            }}
+            style={styles.pdpImage}
+          />
+
+          <FlatList
+            data={product[0]?.data?.media}
+            keyExtractor={(index, item) => index}
+            numColumns={3}
+            renderItem={({ item }) => (
+              <Pressable onPress={() => setMainImage(item.src)}>
+                <ImageBackground
+                  style={styles.pdpImagePr}
+                  source={{
+                    uri: item?.src
+                  }}
+                />
+              </Pressable>
+            )}
+          ></FlatList>
+
+          <View>
+            <Text style={styles.h2}>Customers also view:</Text>
+          </View>
+        </View>
+
+        <View style={styles.flexColumn1}>
+          <Text style={styles.title}>{product[0]?.data.name}</Text>
+          <Text style={styles.prevProductPrice}>
+            {priceFormat(product[0]?.data.pricePrevious)}
+          </Text>
+          <Text style={styles.productPrice}>
+            {priceFormat(product[0]?.data.price)}
+          </Text>
+          <Pressable onPress={() => navigation.navigate("Untitled4")}>
+            <View style={styles.addToBag}>
+              <Text style={styles.addToBagText}>Add to Bag</Text>
+            </View>
+          </Pressable>
+
+          <Text style={styles.description}>
+            {product[0]?.data.features?.replace(regex, "")}
+          </Text>
+          <Text style={styles.materialTitle}>Material:</Text>
+          <Text style={styles.material}>
+            {product[0]?.data.attributes.material}
+          </Text>
+        </View>
+      </View>
+      <View style={styles.flexRow}>
+        <FlatList
+          data={typeFilter}
+          keyExtractor={item.id}
+          numColumns={5}
+          renderItem={({ item }) => (
+            <View>
+              <Pressable onPress={() => setItem(item.id)}>
+                <ImageBackground
+                  style={styles.pdpImagePr}
+                  source={{
+                    uri: item?.data.media[0].src
+                  }}
+                />
+              </Pressable>
+            </View>
+          )}
+        ></FlatList>
+      </View>
+    </SafeAreaView>
+  )
+}
+
+export default ProductDetail
