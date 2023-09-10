@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { democonnector_get_productfeedjson_list } from "../../store/demoConnector/democonnector_response_get_productfeeds.slice"
-import { api_v1_shopping_cart_item_create } from "../../store/entdemoecommerceAPI/shopping_cart_items.slice"
+
 import {
   View,
   Text,
@@ -27,7 +27,7 @@ const ProductDetail = ({ navigation, route }) => {
   }, [item])
   const response = Democonnector_response_get_productfeeds
   const product = Democonnector_response_get_productfeeds
-    ? response.filter(i => i.id === item)
+    ? response?.filter(i => i.id === item)
     : exampleData.filter(i => i.id === item)
   const typeFilter = response?.filter(obj => {
     return (
@@ -121,15 +121,7 @@ const ProductDetail = ({ navigation, route }) => {
           <Text style={styles.productPrice}>
             {priceFormat(product[0]?.data.price)}
           </Text>
-          <Pressable
-            onPress={() =>
-              console.log(
-                dispatch(
-                  api_v1_shopping_cart_item_create({ item_sku: product[0].sku })
-                )
-              )
-            }
-          >
+          <Pressable onPress={() => console.log("clicked")}>
             <View style={styles.addToBag}>
               <Text style={styles.addToBagText}>Add to Bag</Text>
             </View>
