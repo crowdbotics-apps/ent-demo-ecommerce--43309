@@ -29,11 +29,11 @@ const ProductDetail = ({ navigation, route }) => {
   const product = Democonnector_response_get_productfeeds
     ? response.filter(i => i.id === item)
     : exampleData.filter(i => i.id === item)
-  const typeFilter = response.filter(obj => {
+  const typeFilter = response?.filter(obj => {
     return (
-      obj.data.attributes.type == product[0].data.attributes.type &&
-      obj.data.attributes.gender == product[0].data.attributes.gender &&
-      obj.id != product[0].id
+      obj?.data.attributes.type == product[0]?.data.attributes.type &&
+      obj?.data.attributes.gender == product[0]?.data.attributes.gender &&
+      obj?.id != product[0]?.id
     )
   })
   const [mainImage, setMainImage] = useState()
