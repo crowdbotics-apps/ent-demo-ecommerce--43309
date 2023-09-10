@@ -24,6 +24,8 @@ const ProductDetail = ({ navigation, route }) => {
     setMainImage(product[0]?.data.media[0].src)
   }, [item])
   const response = Democonnector_response_get_productfeeds
+    ? Democonnector_response_get_productfeeds
+    : exampleData
   const product = Democonnector_response_get_productfeeds
     ? response.filter(i => i.id === item)
     : exampleData
@@ -85,13 +87,10 @@ const ProductDetail = ({ navigation, route }) => {
               </Pressable>
             )}
           ></FlatList>
-          {typeFilter != [{}] ? (
-            <>
-              <View>
-                <Text style={styles.h2}>Customers also view:</Text>
-              </View>
-            </>
-          ) : null}
+
+          <View>
+            <Text style={styles.h2}>Customers also view:</Text>
+          </View>
         </View>
 
         <View style={styles.flexColumn1}>
