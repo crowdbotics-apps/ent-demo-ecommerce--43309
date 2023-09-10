@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from "react-native"
 export const styles = StyleSheet.create({
   addToBag: {
     width: "50%",
@@ -60,7 +60,14 @@ export const styles = StyleSheet.create({
   },
   flexRow: {
     flex: 1,
-    flexDirection: "row"
+    flexDirection: "row",
+    width: "100%",
+    marginLeft: 30
+  },
+  flexRowMain: {
+    flex: 1,
+    flexDirection: "row",
+    minHeight: 500
   },
   h1: {
     fontFamily: "Helvetica",
@@ -226,5 +233,4 @@ export const styles = StyleSheet.create({
   OKkUptWz: {
     color: "#c41320"
   } //Product Card
-
-});
+})
