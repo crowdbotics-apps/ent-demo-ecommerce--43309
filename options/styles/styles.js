@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   addToBag: {
     width: "50%",
@@ -233,4 +233,5 @@ export const styles = StyleSheet.create({
   OKkUptWz: {
     color: "#c41320"
   } //Product Card
-})
+
+});
