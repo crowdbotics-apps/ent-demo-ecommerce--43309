@@ -10,7 +10,7 @@ import {
   Pressable,
   FlatList
 } from "react-native"
-import { styles } from "../styles/styles"
+import { styles } from "../../options/styles/styles"
 
 const ProductDetail = ({ navigation, route }) => {
   const [filtered, setFiltered] = useState(false)
