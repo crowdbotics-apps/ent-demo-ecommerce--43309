@@ -8,8 +8,76 @@ function api_docs_schema_retrieve(payload) {
     params: { lang: payload.lang }
   })
 }
+function api_v1_entry_list(payload) {
+  return entdemoecommerceAPI.get(`/api/v1/entry/`)
+}
+function api_v1_entry_create(payload) {
+  return entdemoecommerceAPI.post(`/api/v1/entry/`, payload.data)
+}
+function api_v1_entry_retrieve(payload) {
+  return entdemoecommerceAPI.get(`/api/v1/entry/${payload.id}/`)
+}
+function api_v1_entry_update(payload) {
+  return entdemoecommerceAPI.put(`/api/v1/entry/${payload.id}/`, payload.data)
+}
+function api_v1_entry_partial_update(payload) {
+  return entdemoecommerceAPI.patch(`/api/v1/entry/${payload.id}/`, payload.data)
+}
+function api_v1_entry_destroy(payload) {
+  return entdemoecommerceAPI.delete(`/api/v1/entry/${payload.id}/`)
+}
 function api_v1_login_create(payload) {
   return entdemoecommerceAPI.post(`/api/v1/login/`, payload.data)
+}
+function api_v1_shopping_cart_list(payload) {
+  return entdemoecommerceAPI.get(`/api/v1/shopping_cart/`)
+}
+function api_v1_shopping_cart_create(payload) {
+  return entdemoecommerceAPI.post(`/api/v1/shopping_cart/`, payload.data)
+}
+function api_v1_shopping_cart_retrieve(payload) {
+  return entdemoecommerceAPI.get(`/api/v1/shopping_cart/${payload.id}/`)
+}
+function api_v1_shopping_cart_update(payload) {
+  return entdemoecommerceAPI.put(
+    `/api/v1/shopping_cart/${payload.id}/`,
+    payload.data
+  )
+}
+function api_v1_shopping_cart_partial_update(payload) {
+  return entdemoecommerceAPI.patch(
+    `/api/v1/shopping_cart/${payload.id}/`,
+    payload.data
+  )
+}
+function api_v1_shopping_cart_destroy(payload) {
+  return entdemoecommerceAPI.delete(`/api/v1/shopping_cart/${payload.id}/`)
+}
+function api_v1_shopping_cart_items_list(payload) {
+  return entdemoecommerceAPI.get(`/api/v1/shopping_cart_items/`)
+}
+function api_v1_shopping_cart_items_create(payload) {
+  return entdemoecommerceAPI.post(`/api/v1/shopping_cart_items/`, payload.data)
+}
+function api_v1_shopping_cart_items_retrieve(payload) {
+  return entdemoecommerceAPI.get(`/api/v1/shopping_cart_items/${payload.id}/`)
+}
+function api_v1_shopping_cart_items_update(payload) {
+  return entdemoecommerceAPI.put(
+    `/api/v1/shopping_cart_items/${payload.id}/`,
+    payload.data
+  )
+}
+function api_v1_shopping_cart_items_partial_update(payload) {
+  return entdemoecommerceAPI.patch(
+    `/api/v1/shopping_cart_items/${payload.id}/`,
+    payload.data
+  )
+}
+function api_v1_shopping_cart_items_destroy(payload) {
+  return entdemoecommerceAPI.delete(
+    `/api/v1/shopping_cart_items/${payload.id}/`
+  )
 }
 function api_v1_signup_create(payload) {
   return entdemoecommerceAPI.post(`/api/v1/signup/`, payload.data)
@@ -55,7 +123,25 @@ function rest_auth_user_partial_update(payload) {
 }
 export const apiService = {
   api_docs_schema_retrieve,
+  api_v1_entry_list,
+  api_v1_entry_create,
+  api_v1_entry_retrieve,
+  api_v1_entry_update,
+  api_v1_entry_partial_update,
+  api_v1_entry_destroy,
   api_v1_login_create,
+  api_v1_shopping_cart_list,
+  api_v1_shopping_cart_create,
+  api_v1_shopping_cart_retrieve,
+  api_v1_shopping_cart_update,
+  api_v1_shopping_cart_partial_update,
+  api_v1_shopping_cart_destroy,
+  api_v1_shopping_cart_items_list,
+  api_v1_shopping_cart_items_create,
+  api_v1_shopping_cart_items_retrieve,
+  api_v1_shopping_cart_items_update,
+  api_v1_shopping_cart_items_partial_update,
+  api_v1_shopping_cart_items_destroy,
   api_v1_signup_create,
   rest_auth_login_create,
   rest_auth_logout_retrieve,
